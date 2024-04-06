@@ -26,6 +26,10 @@ public class Category {
     @Column(name = "code")
     private String code;
 
+    // Buradaki mappedBy karşı taraftaki ilişkideki değişkenin adıdır. OneToMany anatasyonuna yazılır
+    // Category tablosunda products sütunu yoktur. Bu yapı ilişkiyi belirtir.
+    // orphanRemoval = ilişkilendirilen varlıkların kaldırılması gerektiğinde
+    // kategori varlığından da kaldırılıp kaldırılmayacağını belirti
     @OneToMany(mappedBy = "category", orphanRemoval = true, cascade = CascadeType.REMOVE)
     List<Product> products;
 }

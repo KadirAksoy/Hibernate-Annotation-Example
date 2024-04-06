@@ -25,18 +25,19 @@ public class Product {
 
     private Integer quantity;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    // JoinColumn ile sütun oluşturmuş oluruz
+    @OneToOne(cascade = CascadeType.ALL) // CascadeType.All tüm işlemleri yapar güncelle, kaydet, sil vs
     @JoinColumn(name = "product_detail_id", referencedColumnName = "ID")
     private ProductDetail productDetail;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "ID")
+    @JoinColumn(name = "category_id", referencedColumnName = "ID")  // sütun oluşturur category_id adında. ve referans alınan sütunün adı yazılır
     private Category category;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST) // ManyToMany yapısında jointable kullanılması uygundur.
     @JoinTable(
-            name = "PRODUCT_TAG_REL",
-            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "ID"),
+            name = "PRODUCT_TAG_REL",     // tabloya isim verir
+            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "ID"), // tablo sütunu
             inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "ID")
     )
     private Set<Tag> tags;
